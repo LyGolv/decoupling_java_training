@@ -3,6 +3,9 @@ package fr.lernejo.guessgame;
 import fr.lernejo.logger.Logger;
 import fr.lernejo.logger.LoggerFactory;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Simulation {
     private final Logger logger = LoggerFactory.getLogger("simulation");
     private final Player player;
@@ -27,7 +30,11 @@ public class Simulation {
         return test;
     }
 
-    public void loopUntilPlayerSucceed() {
-        while (!this.nextRound());
+    public void loopUntilPlayerSucceed(long maxIteration) {
+
+        long oldTime = System.currentTimeMillis() * 1000000;
+        while (!this.nextRound()) --maxIteration;
+        System.out.println(LocalTime.ofNanoOfDay(System.currentTimeMillis() * 1000000 - oldTime)
+            .format(DateTimeFormatter.ofPattern("mm:ss:SSS")));
     }
 }
