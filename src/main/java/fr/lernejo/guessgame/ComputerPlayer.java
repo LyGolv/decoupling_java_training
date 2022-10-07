@@ -6,15 +6,12 @@ import fr.lernejo.logger.LoggerFactory;
 public class ComputerPlayer implements Player{
 
     private final Logger logger = LoggerFactory.getLogger("computer");
-    private long oldNumber;
-    private boolean indice;
+    private long inf = 0;
+    private long sup = Long.MAX_VALUE;
 
-    public void initNumber(long oldNumber) {
-        this.oldNumber = oldNumber;
-    }
     @Override
     public long askNextGuess() {
-        oldNumber = indice ? oldNumber / 2 : (long)3 * oldNumber/2;
+        long oldNumber = (sup + inf) / 2;
         this.logger.log("askNextGuess(): le nombre donné est " + oldNumber);
         return oldNumber;
     }
@@ -22,7 +19,9 @@ public class ComputerPlayer implements Player{
     @Override
     public void respond(boolean lowerOrGreater) {
         System.out.println(lowerOrGreater ? "Plus Grand" : "Plus Petit");
-        this.indice = lowerOrGreater;
+        long oldNumber = (sup + inf) / 2;
+        if (lowerOrGreater) sup = Math.min(sup, oldNumber);
+        else inf = Math.max(inf, oldNumber);
         String logMsg = lowerOrGreater ? "respond(): Nombre donné plus grand"
             : "respond(): Nombre donné plus petit";
         this.logger.log(logMsg);
