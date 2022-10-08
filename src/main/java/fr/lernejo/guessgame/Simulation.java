@@ -23,10 +23,9 @@ public class Simulation {
      * @return true if the player have guessed the right number
      */
     private boolean nextRound() {
-        this.logger.log("nextRound(): playing...");
         long guess = player.askNextGuess();
         if (guess == this.numberToGuess) {
-            this.logger.log("===== Le nombre secret à été trouvé ===== ");
+            this.logger.log("===== Le nombre secret à été trouvé: Vous avez gagné ===== ");
             return true;
         }
         // true: lower to found, false: Greater to found

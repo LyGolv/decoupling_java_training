@@ -9,7 +9,7 @@ public class Launcher {
         if (args.length == 1 && args[0].equals("-interactive")) {
             HumanPlayer hPlayer = new HumanPlayer();
             Simulation simulation = new Simulation(hPlayer);
-            simulation.initialize(new SecureRandom().nextLong());
+            simulation.initialize(new SecureRandom().nextLong(100));
             simulation.loopUntilPlayerSucceed(Long.MAX_VALUE);
         } else if (args.length == 2 && args[0].equals("-auto")) {
             ComputerPlayer cPlayer = new ComputerPlayer();
