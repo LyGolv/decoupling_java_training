@@ -25,7 +25,10 @@ public class Simulation {
     private boolean nextRound() {
         this.logger.log("nextRound(): playing...");
         long guess = player.askNextGuess();
-        if (guess == this.numberToGuess) return true;
+        if (guess == this.numberToGuess) {
+            this.logger.log("===== Le nombre secret à été trouvé ===== ");
+            return true;
+        }
         // true: lower to found, false: Greater to found
         else player.respond(this.numberToGuess < guess);
         return false;
